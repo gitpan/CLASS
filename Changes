@@ -1,5 +1,11 @@
 Revision history for Perl extension CLASS
 
+0.90  Fri Nov 29 14:26:09 PST 2002
+    * Colm figured out a way to add $CLASS
+    * Cut out using any other modules so load time is now negligible.
+    - This pretty much makes the module Feature Complete so jacking
+      up to 0.90 as a beta release.
+
 0.03  Tue Aug 28 01:32:07 EDT 2001
     - Eliminated nearly ALL the code!
     - Explicitly tested all the way back to 5.004
@@ -9,5 +15,3 @@ Revision history for Perl extension CLASS
 
 0.01  Thu Jun 28 13:14:31 EDT 2001
     - First working version.
-
-

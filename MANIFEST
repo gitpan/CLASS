@@ -1,0 +1,7 @@
+Changes
+MANIFEST
+Makefile.PL
+lib/CLASS.pm
+t/CLASS.t
+t/lib/Test/More.pm
+t/lib/Test/Simple.pm

@@ -1,5 +1,8 @@
 Revision history for Perl extension CLASS
 
+0.91  Tue May 20 01:23:08 PDT 2003
+    - CLASS is now a real constant (thanks Juerd)
+
 0.90  Fri Nov 29 14:26:09 PST 2002
     * Colm figured out a way to add $CLASS
     * Cut out using any other modules so load time is now negligible.

@@ -3,7 +3,7 @@
 use 5.004;
 
 use lib qw(t/lib);
-use Test::More tests => 21;
+use Test::More tests => 22;
 
 BEGIN { use_ok('CLASS'); }
 
@@ -75,3 +75,9 @@ sub AUTOLOAD { return "Autoloader" }
 
 ::is( CLASS->i_dont_exist, 'Autoloader',        'CLASS:  AUTOLOAD preserved' );
 ::is( $CLASS->i_dont_exist, 'Autoloader',       '$CLASS: AUTOLOAD preserved' );
+
+
+package main;
+eval q{ CLASS(42); };
+like( $@, '/^Too many arguments for main::CLASS/', 
+                                                'CLASS properly prototyped' );

@@ -3,8 +3,15 @@ package CLASS;
 require 5.004;
 
 use strict;
-use vars qw($VERSION $AUTOLOAD $die_string);
-$VERSION = '0.01';
+use vars qw($VERSION $AUTOLOAD $die_string @EXPORT @ISA);
+$VERSION = '0.02';
+
+require Exporter;
+@ISA = qw(Exporter);
+@EXPORT = qw(CLASS);
+
+sub CLASS { return scalar caller }
+    
 
 # This is tricky.  The die message changes between versions of Perl.
 # Here I'm trying to figure out what it is and translate it to a sprintf
@@ -20,6 +27,8 @@ sub AUTOLOAD {
     my $class = shift;
     my($caller, $file, $line) = caller;
     my($meth) = $AUTOLOAD =~ /::([^:]+)$/;
+
+    return if $meth eq 'DESTROY';
 
     # Gotta make sure we get the die message right if there's no
     # method to call.
@@ -41,28 +50,21 @@ CLASS - Alias for __PACKAGE__
   package Foo;
   use CLASS;
 
+  print CLASS;          # Foo
+
   sub bar { 23 }
 
-  # Prints '23'
-  print CLASS->bar;
+  print CLASS->bar;     # 23
 
 =head1 DESCRIPTION
 
 CLASS is a synonym for __PACKAGE__.  Its easier to type.
 
-It only has to be used once, then its available for the rest of your
-program.
 
-=head2 But what if I want a different name?
+=head1 TODO
 
-Subclass it!
-
-    package Joe;
-    use CLASS;
-    @ISA = qw(CLASS);
-
-Now C<Joe->foo> is a synonym for C<__PACKAGE__->foo>
-
+I tried to provide a $CLASS for easier use in strings, but it doesn't
+quite evaluate right when used as a function argument.
 
 =head1 AUTHOR
 

@@ -1,10 +1,10 @@
 package CLASS;
 
-require 5.004;
+use 5.004;
 
 use strict;
-use vars qw($VERSION $AUTOLOAD $die_string @EXPORT @ISA);
-$VERSION = '0.02';
+use vars qw($VERSION @EXPORT @ISA);
+$VERSION = '0.03';
 
 require Exporter;
 @ISA = qw(Exporter);
@@ -12,34 +12,6 @@ require Exporter;
 
 sub CLASS { return scalar caller }
     
-
-# This is tricky.  The die message changes between versions of Perl.
-# Here I'm trying to figure out what it is and translate it to a sprintf
-# string.
-eval { This::Class::Doesnt::Exist->i_dont_exist };
-$die_string = $@;
-$die_string =~ s/i_dont_exist/%s/g;
-my $caller_nums = $die_string =~ s/This::Class::Doesnt::Exist/%s/g;
-$die_string =~ s/\d+/%d/g;
-$die_string =~ s/\Q$INC{'CLASS.pm'}\E/%s/g;
-
-sub AUTOLOAD {
-    my $class = shift;
-    my($caller, $file, $line) = caller;
-    my($meth) = $AUTOLOAD =~ /::([^:]+)$/;
-
-    return if $meth eq 'DESTROY';
-
-    # Gotta make sure we get the die message right if there's no
-    # method to call.
-    my $meth_ref = $caller->can($meth) || $caller->can('AUTOLOAD');
-    unless( $meth_ref ) {
-        die sprintf $die_string, $meth, ($caller) x $caller_nums, $file, $line;
-    }
-
-    goto $meth_ref;
-}
-
 
 =head1 NAME
 

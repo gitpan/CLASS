@@ -1,5 +1,9 @@
 Revision history for Perl extension CLASS
 
+0.03  Tue Aug 28 01:32:07 EDT 2001
+    - Eliminated nearly ALL the code!
+    - Explicitly tested all the way back to 5.004
+
 0.02  Fri Aug 24 23:34:51 EDT 2001
     * Added CLASS keyword
 

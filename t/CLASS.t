@@ -1,9 +1,9 @@
-#!/usr/bin/perl -Tw
+#!/usr/bin/perl -w
 
 use 5.004;
 
 use lib qw(t/lib);
-use Test::More tests => 7;
+use Test::More tests => 9;
 
 BEGIN { use_ok('CLASS'); }
 
@@ -24,10 +24,16 @@ eval { __PACKAGE__->i_dont_exist };
 my $Foo_death = $@;
 ::is( $CLASS_death, $Foo_death,   '__PACKAGE__ and CLASS die the same' );
 
-#line 24
+#line 29
 my $CLASS_caller = CLASS->check_caller;
 my $Foo_caller   = __PACKAGE__->check_caller;
 ::is($CLASS_caller, $Foo_caller,  'caller preserved' );
+
+
+sub foo { return join ':', @_ }
+
+::is( CLASS->foo,         'Foo',        'Right class to class method call' );
+::is( CLASS->foo('bar'),  'Foo:bar',    'Arguments preserved' );
 
 
 ::is( CLASS,  __PACKAGE__,              'CLASS is right' );

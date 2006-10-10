@@ -3,6 +3,5 @@ MANIFEST
 Makefile.PL
 lib/CLASS.pm
 t/CLASS.t
-t/lib/Test/More.pm
-t/lib/Test/Simple.pm
-META.yml                                Module meta-data (added by MakeMaker)
+META.yml                                 Module meta-data (added by MakeMaker)
+SIGNATURE                                Public-key signature (added by MakeMaker)

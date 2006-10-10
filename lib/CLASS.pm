@@ -2,7 +2,7 @@ package CLASS;
 
 use 5.004;
 
-$VERSION = '0.91';
+$VERSION = '1.00';
 
 BEGIN { 
     # Faster than 'use constant'.  Load time critical.
@@ -11,7 +11,6 @@ BEGIN {
 }
 
 sub import {
-    my($self) = shift;
     my $caller = caller;
     *{$caller.'::CLASS'} = \$caller;
 
@@ -26,9 +25,11 @@ sub import {
     }
 }
 
+
 =head1 NAME
 
 CLASS - Alias for __PACKAGE__
+
 
 =head1 SYNOPSIS
 
@@ -50,6 +51,7 @@ CLASS and $CLASS are both synonyms for __PACKAGE__.  Easier to type.
 
 $CLASS has the additional benefit of working in strings.
 
+
 =head1 NOTES
 
 CLASS is a constant, not a subroutine call.  $CLASS is a plain
@@ -57,9 +59,18 @@ variable, it is not tied.  There is no performance loss for using
 CLASS over __PACKAGE__ except the loading of the module. (Thanks
 Juerd)
 
+
 =head1 AUTHOR
 
 Michael G Schwern <schwern@pobox.com>
+
+
+=head1 LICENSE
+
+This program is free software; you can redistribute it and/or
+modify it under the same terms as Perl itself.
+
+See L<http://www.perl.com/perl/misc/Artistic.html>
 
 
 =head1 SEE ALSO
